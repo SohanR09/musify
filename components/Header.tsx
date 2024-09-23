@@ -50,7 +50,7 @@ const Header = () => {
   }, [session, userData]);
 
   return (
-    <div className="sticky top-2 left-64 right-0 h-14 bg-black p-4 flex justify-between justify-items-center z-10">
+    <div className="sticky md:top-2 top-0 left-64 right-0 h-16 bg-black p-4 flex justify-between justify-items-center z-10">
       <div className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"

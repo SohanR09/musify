@@ -27,9 +27,7 @@ const RecentlyPlayedTracks = ({
   };
   return (
     <div className="relative mt-9">
-      <h2 className="text-xl font-semibold text-white mb-4">
-        Recently Played Tracks
-      </h2>
+      <h2 className="text-xl font-semibold text-white mb-4">Recently Played</h2>
 
       {/* Scroll buttons */}
       <button

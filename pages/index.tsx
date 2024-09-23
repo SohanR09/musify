@@ -6,17 +6,20 @@ import NewReleases from "@/components/NewReleases";
 import RecentlyPlayedTracks from "@/components/RecentlyPlayedTracks";
 import UserPlayLists from "@/components/UserPlayLists";
 import { useEffect } from "react";
+import TopUserPlayLists from "@/components/TopUserPlayLists";
 
 const Home = ({
   user,
   newReleases,
   recentlyPlayedTracks,
   userPlaylist,
-}: {
+}: // featuredPlaylist,
+{
   user: any;
   newReleases: any;
   recentlyPlayedTracks: any;
   userPlaylist: any;
+  // featuredPlaylist: any;
 }) => {
   useEffect(() => {
     let userData;
@@ -36,18 +39,17 @@ const Home = ({
   return (
     <Layout>
       <div className=" py-1 md:px-8 mb-20">
-        <h1 className="text-3xl font-bold text-white mb-6">Hello!!</h1>
-        <div className="">
-          {/* New Releases Section */}
-          <NewReleases newReleases={newReleases} />
-          {/* Top Tracks Section */}
-          <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
-          {/* User playlist Section */}
-          <UserPlayLists
-            userName={user?.display_name}
-            userPlaylist={userPlaylist}
-          />
-        </div>
+        {/* Top User Playlists */}
+        <TopUserPlayLists userPlaylist={userPlaylist} />
+        {/* New Releases Section */}
+        <NewReleases newReleases={newReleases} />
+        {/* Top Tracks Section */}
+        <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
+        {/* User playlist Section */}
+        <UserPlayLists
+          userName={user?.display_name}
+          userPlaylist={userPlaylist}
+        />
       </div>
     </Layout>
   );
@@ -69,7 +71,7 @@ export async function getServerSideProps(context: any) {
   const newReleases = await spotifyApi.getNewReleases();
   const recentlyPlayedTracks = await spotifyApi.getMyRecentlyPlayedTracks();
   const userPlaylist = await spotifyApi.getUserPlaylists();
-
+  // const featuredPlaylist = await spotifyApi.get
   return {
     props: {
       session,
@@ -77,6 +79,7 @@ export async function getServerSideProps(context: any) {
       newReleases: newReleases?.body?.albums?.items,
       recentlyPlayedTracks: recentlyPlayedTracks?.body?.items,
       userPlaylist: userPlaylist?.body?.items,
+      // featuredPlaylist: featuredPlaylist?.body?.items,
     },
   };
 }
