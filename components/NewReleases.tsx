@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import PlaylistCard from "../components/PlaylistCard";
+import PlaylistCard from "./PlaylistCard";
 
 const NewReleases = ({ newReleases }: { newReleases: any }) => {
   const scrollRef = useRef<HTMLDivElement>(null);

@@ -40,9 +40,11 @@ export default NextAuth({
       clientId: process.env.SPOTIFY_CLIENT_ID!,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET!,
       authorization: LOGIN_URL,
+      // token: "https://accounts.spotify.com/api/token",
+      // userinfo: "https://api.spotify.com/v1/me",
     }),
   ],
-  // secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     // This is called when the JWT is first created or when the session is refreshed
     async jwt({ token, account, user }) {
