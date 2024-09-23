@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <SessionProvider>
       <Head>
         <title>Musify</title> {/* Update your title here */}
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/components/favicon.ico" />
       </Head>
       <div className="flex flex-col h-screen w-screen overflow-hidden bg-black text-white overflow-y-scroll space-y-1 scrollbar-hide scroll-smooth">
         <Header />
