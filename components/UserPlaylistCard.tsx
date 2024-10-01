@@ -19,7 +19,7 @@ export default function UserPlaylistCard({
   playlistId,
 }: UserPlaylistCard) {
   return (
-    <Link href={`${playlistId?.length > 0 && `/playlist/${playlistId}`}`}>
+    <Link href={`${playlistId?.length > 0 ? `/playlist/${playlistId}` : "/"}`}>
       <Card className="w-full h-16 bg-neutral-800 rounded-sm shadow-md hover:bg-neutral-700 transition-transform  border-none hover:cursor-pointer">
         <CardHeader className="flex justify-start items-start flex-row  p-0">
           {/* Image Section */}
