@@ -65,6 +65,19 @@
   }
 }
 
+/* add the code bellow */
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
 /* styles/globals.css */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 
@@ -78,4 +91,29 @@ nav button {
   border: none;
   background: none;
   cursor: pointer;
+}
+
+/* General scrollbar styling (Spotify-like) */
+::-webkit-scrollbar {
+  width: 12px; /* Spotify uses a very thin scrollbar */
+  height: 8px; /* For horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Spotify has a transparent track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3); /* Light transparent thumb */
+  border-radius: 2px; /* Rounded corners for smoothness */
+  border: 2px solid transparent; /* Adds padding for thinner look */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.5
+  ); /* Becomes more visible on hover */
 }

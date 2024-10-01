@@ -5,7 +5,15 @@ import Player from "./Player";
 import { SessionProvider } from "next-auth/react";
 import Head from "next/head";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({
+  children,
+  accessToken,
+  user,
+}: {
+  children: React.ReactNode;
+  accessToken: string;
+  user: string;
+}) => {
   return (
     <SessionProvider>
       <Head>
@@ -15,9 +23,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-col h-screen w-screen overflow-hidden bg-black text-white overflow-y-scroll space-y-1 scrollbar-hide scroll-smooth">
         <Header />
         <div className="flex flex-1 flex-col md:flex-row">
-          <Sidebar />
+          <Sidebar user={user} accessToken={accessToken} />
 
-          <main className=" bg-neutral-900  rounded-lg mx-2 my-4 flex-1 flex-grow overflow-y-scroll scroll-smooth  md:h-[84vh] pt-2 p-4 md:p-6 z-0 mb-10 md:mb-0">
+          <main className=" bg-neutral-900  rounded-lg mx-2 my-4 flex-1 flex-grow md:overflow-y-scroll overflow-y-hidden md:scroll-smooth  md:h-[82vh] z-0 mb-10 md:mb-0">
             {children}
           </main>
         </div>

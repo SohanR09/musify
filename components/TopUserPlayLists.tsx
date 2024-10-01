@@ -2,8 +2,6 @@ import React from "react";
 import UserPlaylistCard from "./UserPlaylistCard";
 
 const TopUserPlayLists = ({ userPlaylist }: { userPlaylist: any }) => {
-  console.log(userPlaylist);
-
   return (
     <div className="relative  mb-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 grid-rows-4 md:grid-rows-1">

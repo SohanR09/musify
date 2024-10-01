@@ -9,12 +9,14 @@ import { useEffect } from "react";
 import TopUserPlayLists from "@/components/TopUserPlayLists";
 
 const Home = ({
+  session,
   user,
   newReleases,
   recentlyPlayedTracks,
   userPlaylist,
 }: // featuredPlaylist,
 {
+  session: any;
   user: any;
   newReleases: any;
   recentlyPlayedTracks: any;
@@ -37,8 +39,8 @@ const Home = ({
   }, [user]);
 
   return (
-    <Layout>
-      <div className=" py-1 md:px-8 mb-20">
+    <Layout accessToken={session?.accessToken} user={user?.display_name}>
+      <div className=" py-1 md:px-8 mb-20 pt-2 p-4 md:p-6">
         {/* Top User Playlists */}
         <TopUserPlayLists userPlaylist={userPlaylist} />
         {/* New Releases Section */}

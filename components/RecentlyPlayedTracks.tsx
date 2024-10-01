@@ -11,7 +11,7 @@ const RecentlyPlayedTracks = ({
   const scrollLeft = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: -300, // Adjust scroll distance as needed
+        left: -500, // Adjust scroll distance as needed
         behavior: "smooth",
       });
     }
@@ -20,7 +20,7 @@ const RecentlyPlayedTracks = ({
   const scrollRight = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: 300, // Adjust scroll distance as needed
+        left: 500, // Adjust scroll distance as needed
         behavior: "smooth",
       });
     }
@@ -43,8 +43,8 @@ const RecentlyPlayedTracks = ({
           className="size-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M15.75 19.5 8.25 12l7.5-7.5"
           />
         </svg>
@@ -63,8 +63,8 @@ const RecentlyPlayedTracks = ({
           className="size-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="m8.25 4.5 7.5 7.5-7.5 7.5"
           />
         </svg>
@@ -73,7 +73,7 @@ const RecentlyPlayedTracks = ({
       {/* Cards Container */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-scroll space-x-4 scrollbar-hide scroll-smooth"
+        className="flex overflow-x-hidden space-x-4 scrollbar-hide scroll-smooth"
       >
         {/* Playlist Cards */}
         {recentlyPlayedTracks?.map(
@@ -93,7 +93,7 @@ const RecentlyPlayedTracks = ({
                 title={name}
                 imageUrl={imageUrl}
                 description={artistsArray}
-                playlistId={id}
+                playlistId={""}
               />
             );
           }
