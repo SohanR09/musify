@@ -10,7 +10,7 @@ import Link from "next/link";
 interface PlaylistCardProps {
   title?: string;
   imageUrl?: string;
-  playlistId?: string;
+  playlistId?: any;
   description?: string;
 }
 
@@ -21,7 +21,10 @@ const PlaylistCard = ({
   description,
 }: PlaylistCardProps) => {
   return (
-    <Link href={`/playlists/${playlistId}`} passHref>
+    <Link
+      href={`${playlistId?.length > 0 ? `/playlist/${playlistId}` : "/"}`}
+      passHref
+    >
       <Card className="min-w-[200px] max-w-[210px] h-[250px] bg-neutral-900 transition-transform transform hover:bg-neutral-800 rounded-md overflow-hidden shadow-lg hover:shadow-xl cursor-pointer border-0">
         <CardContent className="flex flex-col justify-between p-4">
           <img

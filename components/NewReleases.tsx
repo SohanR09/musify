@@ -7,7 +7,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
   const scrollLeft = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: -300, // Adjust scroll distance as needed
+        left: -500, // Adjust scroll distance as needed
         behavior: "smooth",
       });
     }
@@ -16,7 +16,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
   const scrollRight = () => {
     if (scrollRef.current) {
       scrollRef.current.scrollBy({
-        left: 100, // Adjust scroll distance as needed
+        left: 500, // Adjust scroll distance as needed
         behavior: "smooth",
       });
     }
@@ -39,8 +39,8 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
           className="size-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M15.75 19.5 8.25 12l7.5-7.5"
           />
         </svg>
@@ -59,8 +59,8 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
           className="size-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="m8.25 4.5 7.5 7.5-7.5 7.5"
           />
         </svg>
@@ -69,7 +69,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
       {/* Cards Container */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-scroll space-x-4 scrollbar-hide scroll-smooth"
+        className="flex overflow-x-hidden space-x-4 scroll-smooth"
       >
         {/* Playlist Cards */}
         {newReleases?.map(
@@ -98,7 +98,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
                 title={name}
                 imageUrl={images?.[0]?.url}
                 description={artists?.[0]?.name}
-                playlistId={id}
+                playlistId={""}
               />
             );
           }
