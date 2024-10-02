@@ -6,6 +6,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface PlaylistCardProps {
   title?: string;
@@ -22,8 +23,9 @@ const PlaylistCard = ({
 }: PlaylistCardProps) => {
   return (
     <Link
-      href={`${playlistId?.length > 0 ? `/playlist/${playlistId}` : "/"}`}
+      href={"/"}
       passHref
+      onClick={() => window.sessionStorage.setItem("playerId", playlistId)}
     >
       <Card className="min-w-[200px] max-w-[210px] h-[250px] bg-neutral-900 transition-transform transform hover:bg-neutral-800 rounded-md overflow-hidden shadow-lg hover:shadow-xl cursor-pointer border-0">
         <CardContent className="flex flex-col justify-between p-4">

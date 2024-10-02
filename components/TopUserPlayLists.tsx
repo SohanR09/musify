@@ -4,7 +4,7 @@ import UserPlaylistCard from "./UserPlaylistCard";
 const TopUserPlayLists = ({ userPlaylist }: { userPlaylist: any }) => {
   return (
     <div className="relative  mb-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 grid-rows-4 md:grid-rows-1">
+      <div className="grid grid-cols-2 gap-4">
         {userPlaylist
           ?.slice(Math.max(userPlaylist.length - 8, 1))
           ?.map(

@@ -21,6 +21,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
       });
     }
   };
+
   return (
     <div className="relative">
       <h2 className="text-xl font-semibold text-white mb-4">New Releases</h2>
@@ -69,7 +70,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
       {/* Cards Container */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-hidden space-x-4 scroll-smooth"
+        className="flex overflow-x-scroll no-scrollbar space-x-4 scroll-smooth"
       >
         {/* Playlist Cards */}
         {newReleases?.map(
@@ -98,7 +99,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
                 title={name}
                 imageUrl={images?.[0]?.url}
                 description={artists?.[0]?.name}
-                playlistId={""}
+                playlistId={id}
               />
             );
           }

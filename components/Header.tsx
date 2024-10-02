@@ -50,7 +50,7 @@ const Header = () => {
   }, [session, userData]);
 
   return (
-    <div className="sticky md:top-2 top-0 left-64 right-0 h-16 bg-black p-4 flex justify-between justify-items-center z-10">
+    <div className="sticky md:top-2 top-0 left-64 right-0 h-16 bg-neutral-950 p-4 flex justify-between justify-items-center z-10">
       <Link href={"/"}>
         <div className="flex items-center">
           <svg
@@ -72,16 +72,14 @@ const Header = () => {
       </Link>
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="md:hidden text-white focus:outline-none"
+        className="hidden text-white focus:outline-none"
       >
         {userData?.imageUrl ? (
           <Avatar className="w-10 h-10">
             <AvatarImage src={userData?.imageUrl} alt="User Avatar" />
-            <AvatarFallback>U</AvatarFallback>
           </Avatar>
         ) : (
           "☰"
-          // {/* Hamburger Icon */}
         )}
       </button>
       <nav
@@ -140,7 +138,7 @@ const Header = () => {
       </nav>
 
       {session && (
-        <div className="md:flex hidden items-center">
+        <div className=" items-center">
           {userData?.imageUrl ? (
             // Avatar
             <button
@@ -164,10 +162,10 @@ const Header = () => {
           className="absolute right-4 top-full mt-1 w-48 bg-zinc-800  rounded-sm shadow-lg z-20"
         >
           <ul className="py-2">
-            <li className="px-4 py-2 text-white-700 hover:bg-zinc-700  cursor-pointer">
+            {/* <li className="px-4 py-2 text-white-700 hover:bg-zinc-700  cursor-pointer">
               <User className="inline mr-2 w-5 h-5" />
               Profile
-            </li>
+            </li> */}
             <li
               className="px-4 py-2 text-white-700 hover:bg-zinc-700 cursor-pointer"
               onClick={() => {

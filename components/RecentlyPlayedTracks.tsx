@@ -73,7 +73,7 @@ const RecentlyPlayedTracks = ({
       {/* Cards Container */}
       <div
         ref={scrollRef}
-        className="flex overflow-x-hidden space-x-4 scrollbar-hide scroll-smooth"
+        className="flex overflow-x-scroll no-scrollbar space-x-4 scrollbar-hide scroll-smooth"
       >
         {/* Playlist Cards */}
         {recentlyPlayedTracks?.map(

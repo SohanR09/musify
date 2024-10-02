@@ -23,6 +23,9 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { generateGradient } from "@/utils/functions/GenerateGradient";
+import Link from "next/link";
+import IconArrowBackOutline from "@/utils/svg-icons/IconBackward";
 
 function capitalizeFirstLetter(string: string) {
   return string?.charAt(0).toUpperCase() + string?.slice(1);
@@ -61,17 +64,40 @@ const PlaylistTableView = ({
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
-  console.log(playListDetails);
   useEffect(() => {
     playListDetails?.name?.length > 0 && setName(playListDetails?.name);
     playListDetails?.description?.length > 0 &&
       setName(playListDetails?.description);
   }, [playListDetails]);
 
+  const [gradient, setGradient] = useState("");
+
+  useEffect(() => {
+    const GenrateGradient = async () => {
+      try {
+        let gradientClass: any = await generateGradient(
+          playListDetails?.images?.[0]?.url
+        );
+        setGradient(gradientClass);
+      } catch (error) {}
+    };
+
+    if (playListDetails?.images?.[0]?.url) GenrateGradient();
+  }, [playListDetails?.images?.[0]?.url]);
+
   return (
     <div className="  text-white mb-8">
       {/* Playlist Header */}
-      <div className="flex md:flex-row flex-col items-center mb-8 bg-gradient-to-t from-neutral-500 to-neutral-800 p-8 shadow-none">
+
+      <div
+        className={`flex md:flex-row flex-col items-center mb-8  p-8 shadow-none`}
+        style={{
+          background: `${gradient}`,
+        }}
+      >
+        <Link href={"/"} className="w-full -left-20 md:hidden">
+          <IconArrowBackOutline className="w-9 h-9" />
+        </Link>
         <div
           className="md:w-56 md:h-56 w-40 h-40 overflow-hidden rounded-md shadow-md relative"
           onMouseEnter={() => setIsHovered(true)}
@@ -86,18 +112,20 @@ const PlaylistTableView = ({
           {isHovered && (
             <div
               onClick={handleModalOpen}
-              className="md:w-56 md:h-56 w-40 h-40 absolute p-2 bg-black/70 rounded-sm cursor-pointer z-1 top-0 flex flex-col justify-center items-center"
+              className="md:w-56 md:h-56 w-40 h-40 hidden absolute p-2 bg-black/70 rounded-sm cursor-pointer z-1 top-0 md:flex flex-col justify-center items-center"
             >
               <Pencil className="text-whitez" size={50} />
               <span>Choose Photo</span>
             </div>
           )}
         </div>
-        <div className="ml-6">
+        <div className="flex flex-col md:ml-3 justify-start items-start mt-2">
           <span className="font-normal">
             {capitalizeFirstLetter(playListDetails?.type)}
           </span>
-          <h1 className="text-6xl font-bold">{playListDetails?.name}</h1>
+          <h1 className="md:text-3xl text-xl font-bold">
+            {playListDetails?.name}
+          </h1>
           <div className="mt-2 text-lg">
             {/* <span>Playlist</span> •{" "} */}
             <span className="font-semibold">
@@ -114,7 +142,7 @@ const PlaylistTableView = ({
       </div>
 
       {/* Control Section */}
-      <div className="flex items-center gap-4 mb-4 px-4">
+      <div className="flex justify-end md:justify-start gap-4 mb-4 px-4 w-full">
         <Button className="bg-green-500 text-black w-16 h-16 rounded-full flex items-center justify-center hover:bg-green-400 transition duration-300 ease-in-out hover:scale-110">
           <IconPlayFill className="w-8 h-8" fill="black" />
         </Button>
@@ -128,13 +156,15 @@ const PlaylistTableView = ({
         <Table className="border-separate border-spacing-y-2">
           <TableHeader>
             <TableRow className="hover:bg-transparent items-center justify-center">
-              <TableCell className="text-gray-400 flex">#</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Album</TableCell>
-              <TableCell className="text-gray-400 hidden md:flex">
+              <TableCell className="text-white flex text-2xl">#</TableCell>
+              <TableCell className="text-2xl text-white">Title</TableCell>
+              <TableCell className="hidden md:table-cell text-2xl text-white">
+                Album
+              </TableCell>
+              <TableCell className="text-white hidden md:flex text-2xl">
                 Date added
               </TableCell>
-              <TableCell className="text-right text-gray-400 md:table-cell hidden md:justify-center">
+              <TableCell className="text-right text-gray-400 sm:table-cell hidden md:justify-center text-2xl">
                 <IconDuration className="w-5 h-5" fill="white" />
               </TableCell>
             </TableRow>
@@ -166,7 +196,9 @@ const PlaylistTableView = ({
                         </div>
                       </div>
                     </TableCell>
-                    <TableCell className="">{track?.album?.name}</TableCell>
+                    <TableCell className="hidden md:table-cell">
+                      {track?.album?.name}
+                    </TableCell>
                     <TableCell className="text-gray-400 hidden md:flex text-left">
                       {moment(added_at).format("ll")}
                     </TableCell>

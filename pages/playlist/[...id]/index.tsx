@@ -30,12 +30,16 @@ const index = ({
     }
   }, [accessToken]);
 
+  const getPlayList = getPlayListDetails({ userPlaylist, playListId });
+
   return (
     <Layout accessToken={accessToken} user={user?.display_name}>
-      <PlaylistTableView
-        playlistTracks={playListTracks}
-        playListDetails={getPlayListDetails({ userPlaylist, playListId })}
-      />
+      {getPlayList && playListTracks && (
+        <PlaylistTableView
+          playlistTracks={playListTracks}
+          playListDetails={getPlayListDetails({ userPlaylist, playListId })}
+        />
+      )}
     </Layout>
   );
 };
