@@ -99,7 +99,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
                 title={name}
                 imageUrl={images?.[0]?.url}
                 description={artists?.[0]?.name}
-                playlistId={id}
+                playlistId={""}
               />
             );
           }

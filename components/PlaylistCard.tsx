@@ -23,9 +23,9 @@ const PlaylistCard = ({
 }: PlaylistCardProps) => {
   return (
     <Link
-      href={"/"}
+      href={`${playlistId !== "" ? `/playlist/${playlistId}` : "/"}`}
       passHref
-      onClick={() => window.sessionStorage.setItem("playerId", playlistId)}
+      // onClick={() => window.sessionStorage.setItem("playerId", playlistId)}
     >
       <Card className="min-w-[200px] max-w-[210px] h-[250px] bg-neutral-900 transition-transform transform hover:bg-neutral-800 rounded-md overflow-hidden shadow-lg hover:shadow-xl cursor-pointer border-0">
         <CardContent className="flex flex-col justify-between p-4">
