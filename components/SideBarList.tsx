@@ -12,7 +12,11 @@ const SideBarList = ({
   playListId: string;
 }) => {
   return (
-    <ul className="space-y-2 flex-1 overflow-y-scroll overflow-x-hidden h-[71vh] no-scrollbar">
+    <ul
+      className={`space-y-2 flex-1 overflow-y-scroll overflow-x-hidden h-[71vh] ${
+        isCollapsed && "no-scrollbar"
+      }`}
+    >
       {playlists?.map(
         ({
           id,
