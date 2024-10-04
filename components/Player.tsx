@@ -47,7 +47,7 @@ const Player = ({ accessToken }: { accessToken: any }) => {
         </div>
       ) : (
         <div
-          className={`flex flex-col md:flex-row h-full${
+          className={`flex flex-col md:flex-row h-full ${
             playListId === "" || typeof playListId === "undefined"
               ? "justify-center"
               : "md:justify-start justify-center items-center gap-5"
