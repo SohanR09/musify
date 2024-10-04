@@ -48,6 +48,7 @@ const PlaylistCard = ({
                 ? `/track/${playlistId}`
                 : `/playlist/${playlistId}`
             }`}
+            passHref
           >
             <h3 className="text-lg font-semibold text-white truncate mt-2 hover:underline">
               {title}

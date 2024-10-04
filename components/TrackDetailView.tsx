@@ -9,8 +9,6 @@ import { Button } from "./ui/button";
 import IconPlayFill from "@/utils/svg-icons/IconPlayFilled";
 
 const TrackDetailView = ({ trackData }: { trackData: any }) => {
-  console.log(trackData);
-
   const [gradient, setGradient] = useState("");
 
   useEffect(() => {

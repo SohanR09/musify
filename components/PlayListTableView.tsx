@@ -198,7 +198,7 @@ const PlaylistTableView = ({
                 return (
                   <TableRow
                     key={track?.id}
-                    className="hover:bg-neutral-800 cursor-pointer"
+                    className="hover:bg-neutral-800 hover:rounded-md cursor-pointer"
                     onClick={() => {
                       window.sessionStorage.setItem("playerId", track?.id);
                       // Dispatch a custom event to notify the player component
@@ -206,19 +206,22 @@ const PlaylistTableView = ({
                     }}
                   >
                     <TableCell className="text-gray-400">{count}</TableCell>
-                    <TableCell className="flex items-center gap-3">
+                    <TableCell className="flex  gap-3">
                       <img
                         src={track?.album?.images?.[0]?.url}
                         alt={track?.name}
                         className="w-10 h-10"
                       />
-                      <div>
-                        <Link
-                          className="hover:underline"
+                      <div className="flex-col items-start">
+                        {/* <Link
+                          className="hover:underline md:flex hidden"
                           href={`/track/${track?.id}`}
                         >
-                          <div className="font-semibold">{track?.name}</div>
-                        </Link>
+                          <span className="font-semibold">{track?.name}</span>
+                        </Link> */}
+                        <span className="font-semibold flex">
+                          {track?.name}
+                        </span>
                         <div className="text-sm text-gray-400">
                           {track?.artists
                             .map((artist: any) => artist.name)

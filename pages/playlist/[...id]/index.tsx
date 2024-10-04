@@ -22,8 +22,7 @@ const index = ({
   const [playListTracks, setPlayListTracks] = useState<any>();
 
   useEffect(() => {
-    let tempTrakArray;
-    if (accessToken && playListId) {
+    if (accessToken !== "" && playListId !== "") {
       getPlaylistTracks({ playListId, accessToken }).then((data) => {
         data?.length > 0 && setPlayListTracks(data);
       });
