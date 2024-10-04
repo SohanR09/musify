@@ -89,7 +89,7 @@ export const generateGradient = async (imageInput: any) => {
     img.onload = () => {
       // Extract the dominant color from the image
       const [r, g, b] = extractDominantColor(img);
-      const percentage = 0.5;
+      const percentage = 0.3;
       // Lighten the dominant color for the top of the gradient
       const [lightR, lightG, lightB] = lightenColor({ r, g, b, percentage }); // 50% lighter
 

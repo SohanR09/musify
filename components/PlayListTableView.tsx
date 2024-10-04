@@ -92,6 +92,7 @@ const PlaylistTableView = ({
 
     if (playListDetails?.images?.[0]?.url) GenrateGradient();
   }, [playListDetails?.images?.[0]?.url]);
+
   function getRandomObjectFromArray(arr: any) {
     const randomIndex = Math.floor(Math.random() * arr.length);
     return arr[randomIndex];
