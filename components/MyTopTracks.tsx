@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import PlaylistCard from "./PlaylistCard";
 
-const NewReleases = ({ newReleases }: { newReleases: any }) => {
+const MyTopTracks = ({ myTopTracks }: { myTopTracks: any }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -24,7 +24,7 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
 
   return (
     <div className="relative">
-      <h2 className="text-xl font-semibold text-white mb-4">New Releases</h2>
+      <h2 className="text-xl font-semibold text-white mb-4">Your top tracks</h2>
 
       {/* Scroll buttons */}
       <button
@@ -73,17 +73,17 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
         className="flex overflow-x-scroll no-scrollbar space-x-4 scroll-smooth"
       >
         {/* Playlist Cards */}
-        {newReleases?.map(
+        {myTopTracks?.map(
           ({
             id,
             name,
             artists,
-            images,
+            album,
           }: {
             id: string;
             name: string;
             artists: any;
-            images: any;
+            album: any;
           }) => {
             let artistsArray;
             artistsArray = Array.isArray(artists)
@@ -98,10 +98,11 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
               <PlaylistCard
                 key={id}
                 title={name}
-                imageUrl={images?.[0]?.url}
+                imageUrl={album?.images?.[0]?.url}
                 description={artists?.[0]?.name}
                 playlistId={id}
-                toPlay={"no"}
+                toPlay={"yes"}
+                type="track"
               />
             );
           }
@@ -111,4 +112,4 @@ const NewReleases = ({ newReleases }: { newReleases: any }) => {
   );
 };
 
-export default NewReleases;
+export default MyTopTracks;

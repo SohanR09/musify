@@ -26,12 +26,12 @@ const Layout = ({
         <div className="flex flex-1 flex-col md:flex-row">
           <Sidebar user={user} accessToken={accessToken} />
 
-          <main className=" sm:bg-neutral-900  rounded-lg mx-2 my-4 flex-1 flex-grow md:overflow-y-scroll overflow-y-hidden md:scroll-smooth  md:h-[82vh] z-0 mb-10 md:mb-0">
+          <main className=" sm:bg-neutral-900  rounded-lg mx-2 my-4 flex-1 flex-grow md:overflow-y-scroll overflow-y-hidden md:scroll-smooth  md:h-[80vh] z-0 md:mb-0">
             {children}
           </main>
         </div>
-        {/* <Player accessToken={accessToken} /> */}
-        <MobileViewMenu />
+        <Player accessToken={accessToken} />
+        {/* <MobileViewMenu /> */}
       </div>
     </SessionProvider>
   );

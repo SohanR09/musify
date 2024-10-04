@@ -93,7 +93,9 @@ const RecentlyPlayedTracks = ({
                 title={name}
                 imageUrl={imageUrl}
                 description={artistsArray}
-                playlistId={""}
+                playlistId={id}
+                toPlay={"yes"}
+                type="track"
               />
             );
           }

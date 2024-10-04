@@ -29,7 +29,6 @@ export default async function GetPlayPause({
     }
 
     const data = await response.json();
-    console.log(data);
 
     return data;
   } catch (error) {}

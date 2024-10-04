@@ -109,6 +109,8 @@ const UserPlayLists = ({
                     description === "" ? `By ${userName}` : description
                   }
                   playlistId={id}
+                  toPlay="yes"
+                  type="playlist"
                 />
               </div>
             );

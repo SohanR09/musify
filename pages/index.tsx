@@ -7,6 +7,7 @@ import RecentlyPlayedTracks from "@/components/RecentlyPlayedTracks";
 import UserPlayLists from "@/components/UserPlayLists";
 import { useEffect } from "react";
 import TopUserPlayLists from "@/components/TopUserPlayLists";
+import MyTopTracks from "@/components/MyTopTracks";
 
 const Home = ({
   session,
@@ -14,14 +15,14 @@ const Home = ({
   newReleases,
   recentlyPlayedTracks,
   userPlaylist,
-}: // featuredPlaylist,
-{
+  myTopTracks,
+}: {
   session: any;
   user: any;
   newReleases: any;
   recentlyPlayedTracks: any;
   userPlaylist: any;
-  // featuredPlaylist: any;
+  myTopTracks: any;
 }) => {
   useEffect(() => {
     let userData;
@@ -43,8 +44,10 @@ const Home = ({
       <div className=" py-1 md:px-8 mb-20 pt-2 p-4 md:p-6">
         {/* Top User Playlists */}
         <TopUserPlayLists userPlaylist={userPlaylist} />
+        {/* My top tracks */}
+        <MyTopTracks myTopTracks={myTopTracks} />
         {/* New Releases Section */}
-        <NewReleases newReleases={newReleases} />
+        {/* <NewReleases newReleases={newReleases} /> */}
         {/* Top Tracks Section */}
         <RecentlyPlayedTracks recentlyPlayedTracks={recentlyPlayedTracks} />
         {/* User playlist Section */}
@@ -73,6 +76,7 @@ export async function getServerSideProps(context: any) {
   const newReleases = await spotifyApi.getNewReleases();
   const recentlyPlayedTracks = await spotifyApi.getMyRecentlyPlayedTracks();
   const userPlaylist = await spotifyApi.getUserPlaylists();
+  const myTopTracks = await spotifyApi.getMyTopTracks();
   // const featuredPlaylist = await spotifyApi.get
   return {
     props: {
@@ -81,6 +85,7 @@ export async function getServerSideProps(context: any) {
       newReleases: newReleases?.body?.albums?.items,
       recentlyPlayedTracks: recentlyPlayedTracks?.body?.items,
       userPlaylist: userPlaylist?.body?.items,
+      myTopTracks: myTopTracks?.body?.items,
       // featuredPlaylist: featuredPlaylist?.body?.items,
     },
   };

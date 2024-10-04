@@ -28,7 +28,7 @@ const index = ({
         data?.length > 0 && setPlayListTracks(data);
       });
     }
-  }, [accessToken]);
+  }, [accessToken, playListId]);
 
   const getPlayList = getPlayListDetails({ userPlaylist, playListId });
 

@@ -1,100 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { Play, Pause, Volume2 } from "lucide-react"; // Icons from lucide-react for play/pause
-import { Button } from "@/components/ui/button"; // shadcn button component
-import GetPlayPause from "@/utils/api-spotify/track/PlayPause";
-import GetVolume from "@/utils/api-spotify/track/GetVolume";
+import React, { useEffect, useState } from "react";
 
 const Player = ({ accessToken }: { accessToken: any }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [trackProgress, setTrackProgress] = useState(0); // Current position of the track
-  const [trackDuration, setTrackDuration] = useState(180); // Placeholder for track duration
-  const [volume, setVolume] = useState(50); // Volume state (default: 50%)
-  const [playerId, setPlayerId] = useState();
-
+  const [trackId, setTrackId] = useState("");
   useEffect(() => {
-    const id: any = window.sessionStorage.getItem("playerId");
-    id && setPlayerId(id);
-  }, []);
+    // Listen for the custom event when trackId is updated
+    const handleTrackIdUpdate = () => {
+      const trackId = window?.sessionStorage?.getItem("playerId");
+      trackId && setTrackId(trackId as string);
+    };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (isPlaying) {
-        setTrackProgress((prev) => (prev < trackDuration ? prev + 1 : prev));
-      }
-    }, 1000);
+    // Add event listener for the custom event
+    window.addEventListener("trackIdUpdated", handleTrackIdUpdate);
 
-    return () => clearInterval(interval);
-  }, [isPlaying, trackDuration]);
-
-  const playPauseTrack = async () => {
-    const method = isPlaying ? "pause" : "play";
-
-    if (accessToken && playerId && method) {
-      GetPlayPause({ accessToken, playerId, method }).then((data) => {
-        console.log(data, "data");
-      });
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const formatTime = (timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = timeInSeconds % 60;
-    return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-  };
-
-  const changeVolume = async (newVolume: number) => {
-    setVolume(newVolume);
-    GetVolume({ accessToken, volume: newVolume / 100 }).then((data) => {
-      console.log(data);
-    });
-    // Make the API call or SDK method to adjust volume
-  };
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener("trackIdUpdated", handleTrackIdUpdate);
+    };
+  });
 
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-900 text-white rounded-lg shadow-md">
-      <div className="flex items-center space-x-4">
-        <img
-          src="/path/to/album_cover.jpg" // replace with your dynamic album cover
-          alt="Album Cover"
-          className="w-12 h-12 object-cover rounded-lg"
-        />
-        <div>
-          <h3 className="text-lg font-semibold">Track Title</h3>
-          <p className="text-sm text-gray-400">Artist Name</p>
+    <div className="spotify-player w-full sticky bottom-1 px-2  md:bottom-2 left-64 right-0 h-20 bg-neutral-950 bg-opacity-80 flex justify-center z-10">
+      {trackId === "" ? (
+        <div className="w-full h-full flex justify-center items-center text-xl">
+          Select a song!
         </div>
-      </div>
-
-      <div className="flex items-center space-x-4">
-        <Button onClick={playPauseTrack}>
-          {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-        </Button>
-        <div className="flex items-center space-x-2 w-64">
-          <span>{formatTime(trackProgress)}</span>
-          <input
-            type="range"
-            min="0"
-            max={trackDuration}
-            value={trackProgress}
-            onChange={(e) => setTrackProgress(Number(e.target.value))}
-            className="w-full bg-gray-600"
-          />
-          <span>{formatTime(trackDuration)}</span>
-        </div>
-
-        {/* Volume Control */}
-        <div className="flex items-center space-x-2">
-          <Volume2 size={20} />
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={volume}
-            onChange={(e) => changeVolume(Number(e.target.value))}
-            className="w-24 bg-gray-600"
-          />
-        </div>
-      </div>
+      ) : (
+        <iframe
+          // style={{border-radius:"12px"}}
+          src={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator`}
+          className="md:w-[80%] w-[100%]"
+          height="80"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+      )}
     </div>
   );
 };

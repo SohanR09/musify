@@ -101,7 +101,7 @@ const Sidebar = ({
     <>
       {/* {!isCollapsed ? ( */}
       <aside
-        className={`bg-neutral-900 rounded-lg mx-2 my-4 text-gray-400  overflow-y-scroll scroll-smooth  h-[82vh]  md:block hidden overflow-hidden no-scrollbar ${
+        className={`bg-neutral-900 rounded-lg mx-2 my-4 text-gray-400  overflow-y-scroll scroll-smooth  h-[80vh]  md:block hidden overflow-hidden no-scrollbar ${
           !isCollapsed ? " w-1/4 pl-4 pr-1" : "pl-1 w-20"
         }`}
       >

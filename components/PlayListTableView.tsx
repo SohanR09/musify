@@ -26,20 +26,8 @@ import { Input } from "@/components/ui/input";
 import { generateGradient } from "@/utils/functions/GenerateGradient";
 import Link from "next/link";
 import IconArrowBackOutline from "@/utils/svg-icons/IconBackward";
-
-function capitalizeFirstLetter(string: string) {
-  return string?.charAt(0).toUpperCase() + string?.slice(1);
-}
-
-function convertMillisToMinSec(millis: number): string {
-  const minutes = Math.floor(millis / 60000); // Convert to minutes
-  const seconds = Math.floor((millis % 60000) / 1000); // Get remaining seconds
-
-  // Pad single-digit seconds with leading zero
-  const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds;
-
-  return `${minutes}:${paddedSeconds}`;
-}
+import capitalizeFirstLetter from "@/utils/functions/Captilizer";
+import convertMillisToMinSec from "@/utils/functions/ConvertMilllitoSec";
 
 const PlaylistTableView = ({
   playlistTracks,
@@ -64,6 +52,26 @@ const PlaylistTableView = ({
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
+  const [trackId1st, setTrackId1st] = useState("");
+
+  useEffect(() => {
+    const trackId = window?.sessionStorage?.getItem("playerId");
+    if (trackId === "" || !trackId) {
+      let idArray: any = new Array();
+      for (let i = 0; i < playlistTracks?.length; i++) {
+        const id = playlistTracks?.[i]?.track?.id;
+        idArray = [...idArray, id];
+      }
+      if (idArray?.[0]?.length > 0) {
+        setTrackId1st(idArray?.[0]);
+        window.sessionStorage.setItem("playerId", idArray?.[0]);
+        // Dispatch a custom event to notify the player component
+        window.dispatchEvent(new Event("trackIdUpdated"));
+      }
+    }
+  }, [playlistTracks]);
+
   useEffect(() => {
     playListDetails?.name?.length > 0 && setName(playListDetails?.name);
     playListDetails?.description?.length > 0 &&
@@ -84,7 +92,10 @@ const PlaylistTableView = ({
 
     if (playListDetails?.images?.[0]?.url) GenrateGradient();
   }, [playListDetails?.images?.[0]?.url]);
-
+  function getRandomObjectFromArray(arr: any) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+  }
   return (
     <div className="  text-white mb-8">
       {/* Playlist Header */}
@@ -143,7 +154,16 @@ const PlaylistTableView = ({
 
       {/* Control Section */}
       <div className="flex justify-end md:justify-start gap-4 mb-4 px-4 w-full">
-        <Button className="bg-green-500 text-black w-16 h-16 rounded-full flex items-center justify-center hover:bg-green-400 transition duration-300 ease-in-out hover:scale-110">
+        <Button
+          className="bg-green-500 text-black w-16 h-16 rounded-full flex items-center justify-center hover:bg-green-400 transition duration-300 ease-in-out hover:scale-110"
+          onClick={() => {
+            const randomTrackID = getRandomObjectFromArray(playlistTracks);
+
+            window.sessionStorage.setItem("playerId", randomTrackID?.track?.id);
+            // Dispatch a custom event to notify the player component
+            window.dispatchEvent(new Event("trackIdUpdated"));
+          }}
+        >
           <IconPlayFill className="w-8 h-8" fill="black" />
         </Button>
         {/* <Button variant="ghost" className="text-white">
@@ -179,6 +199,11 @@ const PlaylistTableView = ({
                   <TableRow
                     key={track?.id}
                     className="hover:bg-neutral-800 cursor-pointer"
+                    onClick={() => {
+                      window.sessionStorage.setItem("playerId", track?.id);
+                      // Dispatch a custom event to notify the player component
+                      window.dispatchEvent(new Event("trackIdUpdated"));
+                    }}
                   >
                     <TableCell className="text-gray-400">{count}</TableCell>
                     <TableCell className="flex items-center gap-3">
@@ -188,7 +213,12 @@ const PlaylistTableView = ({
                         className="w-10 h-10"
                       />
                       <div>
-                        <div className="font-semibold">{track?.name}</div>
+                        <Link
+                          className="hover:underline"
+                          href={`/track/${track?.id}`}
+                        >
+                          <div className="font-semibold">{track?.name}</div>
+                        </Link>
                         <div className="text-sm text-gray-400">
                           {track?.artists
                             .map((artist: any) => artist.name)
