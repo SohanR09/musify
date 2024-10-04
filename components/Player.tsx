@@ -55,7 +55,7 @@ const Player = ({ accessToken }: { accessToken: any }) => {
         >
           <iframe
             // style={{border-radius:"12px"}}
-            src={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator`}
+            src={`https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`}
             className="md:w-[80%] w-[100%]"
             height="80"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -63,7 +63,7 @@ const Player = ({ accessToken }: { accessToken: any }) => {
           ></iframe>
 
           <div
-            className={`md:w-[20%] w-full flex justify-center items-center ${
+            className={`md:w-[20%] w-full flex justify-center items-center bg-neutral-800 h-full rounded-lg ${
               playListId === "" || typeof playListId === "undefined"
                 ? "hidden"
                 : ""

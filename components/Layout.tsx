@@ -19,7 +19,7 @@ const Layout = ({
     <SessionProvider>
       <Head>
         <title>Musify</title> {/* Update your title here */}
-        <link rel="icon" href="/components/favicon.ico" />
+        <link rel="icon" href="/pages/favicon.ico" />
       </Head>
       <div className="flex flex-col h-screen w-screen overflow-hidden bg-neutral-950 text-white overflow-y-scroll no-scrollbar space-y-1 scrollbar-hide scroll-smooth">
         <Header />
